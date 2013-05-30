@@ -2,7 +2,7 @@
 // @name          微信后台pv、uv统计插件
 // @namespace     http://ratwu.com
 // @description   在微信管理后台显示文章pv、uv数据
-// @version	      v1.0
+// @version	      v1.1
 // @include       http://admin.wechat.com/*
 // ==/UserScript==
 
@@ -23,13 +23,6 @@ var Stat = {
 					},
 
 	createRecord: function (title, pv, uv) {
-					// var sidebar = document.getElementsByClassName("sideBar")[0];
-					// var record_div = document.createElement("div");
-					// var record_label = document.createElement("p");
-					// record_label.innerHTML = title + "," + pv + "," + uv;
-					// record_div.appendChild(record_label);
-					// sidebar.appendChild(record_div);
-
 					var table_div = document.getElementById("pv_uv_div");
 					var table = document.createElement("table");
 					table.border = "1";
@@ -55,7 +48,7 @@ var Stat = {
 
 	get_pv_uv: function (element) {
  					var req = new XMLHttpRequest();
-    				var url = "http://admin.wechat.com/cgi-bin/statappmsg?t=ajax-appmsg-stats&url=" + encodeURIComponent(element.href);
+    				var url = "http://admin.wechat.com/cgi-bin/statappmsg?token=1337323640&t=ajax-appmsg-stats&url=" + encodeURIComponent(element.href);
     				var title = element.innerHTML;
     				req.open("GET", url, true);
     				// req.onload = this.showData.bind(this, article_id, article_name);
@@ -71,18 +64,6 @@ var Stat = {
 					},
 
 	sikemiFunction: function (title, e){
-						// var wechat_admin_url = this.location.href;
-						// console.log(wechat_admin_url);
-						// var sidebar = document.getElementsByClassName("sideBar")[0];
-						// var stat_div = document.createElement("div");
-						// var p = document.createElement('p');
-						// p.innerHTML = "hwlo world";
-						// stat_div.appendChild(p);
-						// sidebar.appendChild(stat_div);
-
-						// var article_div = document.getElementsByClassName("msg-item-wrapper")[0];
-						// var article_title = article_div.getElementsByClassName("i-title")[0];
-						// console.log(article_title.href);
 						var data = JSON.parse(e.target.response);
 						Stat.createRecord(title, data.PageView, data.UniqueView);
 					}
